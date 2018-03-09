@@ -7,10 +7,8 @@ def check_dist(w,partial_code):
     '''
     global d
     for codeword in partial_code:
-        # perform bitwise XOR on codeword and w
-        xor = int(codeword,2) ^ int(w,2)
-        # turn the bitstring into a string, count num 1's
-        if "{0:b}".format(xor).count("1") < d:
+        # count distance of codeword with w
+        if (sum([1 if i != j else 0 for i, j in zip(codeword, w)]) < d):
             return False
     return True
 
@@ -44,8 +42,9 @@ def construct_code():
 if __name__ == '__main__':
     for n in range(11,12):
         # generate all bitstrings of length n
-        words = ["".join(seq) for seq in itertools.product("01", repeat=n)]
-        for M in range(16,17):
+        words = ["".join(seq) for seq in itertools.product("012", repeat=n)]
+        m = 30
+        for M in range(m,m+1):
             for d in range(5,6):
                 # initialize code to 0 vector WLOG
                 code = [words[0]]

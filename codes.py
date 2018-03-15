@@ -51,13 +51,17 @@ def construct_code():
                 return True
 
 if __name__ == '__main__':
-    # we are looking for an (n, M, d) code
+    # we are looking for an (n, M, d) code with l letters
     n = 11
     M = 90
     d = 5
+    l = 3
+
+    # generate letters
+    lets = "".join([str(i) for i in range(l)])
 
     # generate all bitstrings of length n
-    words = ["".join(seq) for seq in itertools.product("012", repeat=n)]
+    words = ["".join(seq) for seq in itertools.product(lets, repeat=n)]
     print "There are {} total words of length {}".format(len(words), n)
 
     # filter words with weight < d

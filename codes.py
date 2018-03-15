@@ -53,7 +53,7 @@ def construct_code():
 if __name__ == '__main__':
     # we are looking for an (n, M, d) code with l letters
     n = 11
-    M = 90
+    M = 140
     d = 5
     l = 3
 
@@ -75,9 +75,9 @@ if __name__ == '__main__':
     # create list of words to ignore once they are distance < d to the code
     bad_words = set()
 
-    # initialize code to 0 vector and (0, 11111) WLOG
-    first_word = "00000000000"
-    second_word = "00000011111"
+    # initialize code to 0 vector and (0's, 1's) vector WLOG
+    first_word = "0" * n
+    second_word = ("1" * d).zfill(n)
 
     code = [first_word, second_word]
     # construct a binary (n,M,d)-code

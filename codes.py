@@ -52,6 +52,11 @@ def construct_code():
 
 if __name__ == '__main__':
     # we are looking for an (n, M, d) code with l letters
+
+    # old values for split codewords
+    # n = 5
+    # d = 2
+
     n = 11
     M = 140
     d = 5

@@ -1,4 +1,5 @@
 import itertools
+from random import shuffle
 
 
 def weight(word):
@@ -52,21 +53,30 @@ def construct_code():
 if __name__ == '__main__':
     for n in range(11,12):
         # generate all bitstrings of length n
-        min_weight = 6
         words = ["".join(seq) for seq in itertools.product("012", repeat=n)]
         print "There are {} total words of length {}".format(len(words), n)
+
+        # filter words with weight < d
+        min_weight = 5
         words = filter(lambda i: weight(i) >= min_weight, words)
         print "There are {} total words of length {} and weight at least {}".format(len(words), n, min_weight)
+
+        # shuffle words since they are generated in an order where they are close to each other
+        shuffle(words)
+
+        # create list of words to ignore once they are distance < d to the code
         bad_words = set()
-        m = 30
+
+        m = 130
         for M in range(m,m+1):
             for d in range(5,6):
-                # initialize code to 0 vector WLOG
-                code = [words[0]]
+                # initialize code to 0 vector and (0, 11111) WLOG
+                first_word = "00000000000"
                 second_word = "00000011111"
-                code.append(second_word)
+                code = [first_word, second_word]
                 # construct a binary (n,M,d)-code
                 exists = construct_code()
+                print "There are {} words that were rejected and could be skipped".format(len(bad_words))
                 if not exists:
                     print "I didn't find a binary [",n,"|",M,"|",d,"] code!"
                 else:
